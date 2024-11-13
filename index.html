@@ -10,8 +10,30 @@
     <link rel="stylesheet" href="./scss/main.css">
 </head>
 <body>
-    <header></header>
-    <section></section>
+    <header class="header">
+        <button class="menu_btn " data-menu-button>
+            menu
+        </button>
+        <nav class="nav is-hiden" data-menu>
+            <ul class="menu">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./index.html">About us</a></li>
+                <li><a href="./index.html">tours</a></li>
+                <li><a href="./index.html">contact</a></li>
+            </ul>
+            <button class="cross" data-close-menu>
+                <img src="./images/icons/maki_cross.svg" alt="cross">
+            </button>
+        </nav>
+    </header>
+    <section class="start" >
+        <div class="container start_box">
+            <h1>Feel the Universe</h1>
+            <button class="button">order camping tour</button>
+            <button class="arrow-down"><img src="./images/icons/arrow-down.svg" alt="arrow-down"></button>
+        </div>
+    </section>
     <footer></footer>
+    <script src="./js/menuOpen.js"></script>
 </body>
 </html>
