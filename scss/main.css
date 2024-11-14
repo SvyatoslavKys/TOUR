@@ -26,6 +26,15 @@ a {
 body {
   font-family: "Roboto", sans-serif;
   user-select: none;
+  background: black;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
 }
 
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -204,4 +213,255 @@ Add the correct display in Chrome and Safari.
 */
 summary {
   display: list-item;
+}
+
+.start {
+  background-image: url(../images/background/homeBg.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.start_box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.start_box h1 {
+  font-family: "Kanit", sans-serif;
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 119.6px;
+  text-align: center;
+  color: white;
+  margin-bottom: 100px;
+  animation-name: start;
+  animation-duration: 800ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.start_btn {
+  padding: 16px 60px;
+  border: 1px solid #F3F3F3;
+  background: linear-gradient(180deg, rgba(243, 243, 243, 0.24) 0%, rgba(243, 243, 243, 0) 100%);
+  color: white;
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 37.5px;
+  transition: 300ms;
+  animation-name: startbtn;
+  animation-duration: 800ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+.start_btn:hover {
+  background: white;
+  color: #75452C;
+}
+@media (max-width: 769px) {
+  .start_btn {
+    font-size: 24px;
+    padding: 8px 28px;
+  }
+}
+
+@keyframes start {
+  0% {
+    transform: scale(10);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes startbtn {
+  0% {
+    transform: translateY(500%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background: linear-gradient(90deg, rgba(117, 69, 44, 0.5) 0%, rgba(117, 69, 44, 0) 100%);
+  color: white;
+  transform: translateX(0);
+  transition: 500ms;
+  z-index: 3;
+}
+
+.menu {
+  padding: 66px 46px;
+}
+.menu li {
+  margin-bottom: 16px;
+  transition: 300ms;
+}
+.menu li a {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 37.5px;
+  color: aliceblue;
+  padding: 5px;
+}
+.menu li:hover {
+  transform: scale(0.9);
+}
+
+.nav.is-hiden {
+  transform: translateX(-110%);
+}
+
+.cross {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  cursor: pointer;
+  border: none;
+  padding: 15px;
+  background: transparent;
+  color: aliceblue;
+  transition: 500ms;
+}
+.cross:hover {
+  rotate: 90deg;
+}
+
+.arrow-down {
+  position: absolute;
+  right: 26px;
+  bottom: 44px;
+  background: transparent;
+  border: none;
+  transition: 500ms;
+  padding: 15px;
+  animation-name: arrow;
+  animation-duration: 500ms;
+}
+.arrow-down:hover {
+  transform: scale(0.9);
+}
+.arrow-down img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.arrow-up {
+  position: absolute;
+  top: 44px;
+  right: 26px;
+  transform: rotate(180deg);
+  animation-duration: 500ms;
+}
+.arrow-up:hover {
+  transform: scale(0.9) rotate(180deg);
+}
+.arrow-up img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.menu_btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50px;
+  transform: rotate(-90deg);
+  padding: 10px;
+  z-index: 2;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.13px;
+  color: #F3F3F3;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: 300ms;
+  animation-name: menutbtn;
+  animation-duration: 500ms;
+}
+.menu_btn:hover {
+  transform: scale(1.2) rotate(-90deg);
+}
+.menu_btn::after {
+  content: " ";
+  display: block;
+  margin-left: 40px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #F3F3F3;
+}
+.menu_btn.is-open {
+  display: none;
+}
+
+@keyframes menutbtn {
+  0% {
+    transform: translateX(-500%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0%) rotate(-90deg);
+  }
+}
+@keyframes arrow {
+  0% {
+    transform: translateX(500%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.camping_box {
+  position: relative;
+}
+
+.arrow-up {
+  position: absolute;
+  top: 44px;
+  right: 44px;
+  transform: rotate(180deg);
+}
+
+.about_us {
+  background-image: url(../images/background/aboutUs.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about_box {
+  position: relative;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-image: url(../images/background/homeBg.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wrapper {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(117, 69, 44, 0.5) 100%);
 }/*# sourceMappingURL=main.css.map */

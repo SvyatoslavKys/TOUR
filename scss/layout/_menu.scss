@@ -8,17 +8,19 @@
     color: white;
     transform: translateX(0);
     transition: 500ms;
+    z-index: 3;
 }
 .menu{
     padding: 66px 46px;
     li{
         margin-bottom: 16px;
-        tr
+        transition: 300ms;
         a{
             font-size: 32px;
             font-weight: 400;
             line-height: 37.5px;
             color: aliceblue;
+            padding: 5px;
             
         }
         &:hover{

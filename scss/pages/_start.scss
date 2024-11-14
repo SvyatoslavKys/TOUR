@@ -1,6 +1,6 @@
 .start{
     background-image: url(../images/background/homeBg.jpg);
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -24,8 +24,8 @@
         animation-timing-function: ease-in-out;
         
     }
-    
 }
+
 .start_btn{
     padding: 16px 60px;
     border: 1px solid #F3F3F3;
