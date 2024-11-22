@@ -8,3 +8,16 @@
 .about_box{
     position: relative;
 }
+.title-about{
+    position: absolute;
+    right: 54px;
+    bottom: 155px;
+    transform: rotate(-90deg);
+
+    font-family: 'Kanit',sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 119.6px;
+    text-transform: uppercase;
+    color: white;
+}
