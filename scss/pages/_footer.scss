@@ -85,40 +85,6 @@
   cursor: pointer;
 }
 
-.logo-box {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-}
-
-.logo-box ul {
-  display: flex;
-  flex: 1;
-  position: relative;
-  right: 100px;
-}
-
-.logo-box li {
-  position: absolute;
-}
-
-.logo-box li:nth-child(1) {
-  top: -3px;
-  left: -91px;
-}
-.logo-box li:nth-child(2) {
-  top: 19px;
-  left: -88px;
-}
-.logo-box li:nth-child(3) {
-  top: -2px;
-  left: -67px;
-}
-.logo-box li:nth-child(4) {
-  top: 31px;
-  left: -67px;
-}
-
 .logo-letter {
   width: 30px;
   height: 72px;
