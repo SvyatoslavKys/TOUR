@@ -1,15 +1,149 @@
-
-.footer{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-
-    background-image: url(../images/background/homeBg.jpg);
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
+.footer {
+  background-image: url(../images/background/homeBg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: #f3f3f3;
+  text-align: left;
 }
-.wrapper{
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(117, 69, 44, 0.5) 100%);
+
+.wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(117, 69, 44, 0.5) 100%
+  );
+  padding: 40px 76px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact {
+  flex: 1;
+}
+
+.contact h3 {
+  font-family: "Kanit", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 35.88px;
+  margin-bottom: 20px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact li {
+  margin-bottom: 5px;
+}
+
+.contact a {
+  color: white;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+.follow {
+  flex: 1;
+}
+
+.follow h3 {
+  font-family: "Kanit", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 35.88px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 20px;
+}
+
+.follow ul {
+  display: flex;
+  gap: 16px;
+}
+
+.adress-icon {
+  fill: white;
+  transition: fill 0.3s;
+}
+
+.adress-icon:hover {
+  cursor: pointer;
+}
+
+.logo-box {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.logo-box ul {
+  display: flex;
+  flex: 1;
+  position: relative;
+  right: 100px;
+}
+
+.logo-box li {
+  position: absolute;
+}
+
+.logo-box li:nth-child(1) {
+  top: -3px;
+  left: -91px;
+}
+.logo-box li:nth-child(2) {
+  top: 19px;
+  left: -88px;
+}
+.logo-box li:nth-child(3) {
+  top: -2px;
+  left: -67px;
+}
+.logo-box li:nth-child(4) {
+  top: 31px;
+  left: -67px;
+}
+
+.logo-letter {
+  width: 30px;
+  height: 72px;
+  fill: white;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact,
+  .follow,
+  .logo-box {
+    margin-bottom: 20px;
+  }
+
+  .logo-box ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo-box {
+    justify-content: center;
+  }
 }
