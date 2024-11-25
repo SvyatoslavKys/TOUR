@@ -7,7 +7,7 @@
   color: $primary-color;
   text-align: left;
 
-  .container-footer {
+  .container_footer {
     max-width: 1440px;
     margin: 0 auto;
     padding: 40px 76px;
@@ -114,9 +114,9 @@
     }
   }
 
-  // Responsive Styles
+  
   @media (max-width: 480px) {
-    .container-footer {
+    .container_footer {
       @include flex-center(column, center, center);
       text-align: center;
     }
