@@ -22,10 +22,17 @@
       $background-color 0%,
       $accent-color 100%
     );
+    background: linear-gradient(
+      180deg,
+      $background-color 0%,
+      $accent-color 100%
+    );
     width: 100%;
     height: 100%;
   }
 
+  .contact,
+  .follow {
   .contact,
   .follow {
     flex: 1;
@@ -50,6 +57,7 @@
       color: $link-hover-color;
       text-decoration: none;
       transition: 0.3s;
+      transition: 0.3s;
 
       &:hover {
         text-decoration: underline;
@@ -65,9 +73,11 @@
     .adress-icon {
       fill: $primary-color;
       transition: 0.3s;
+      transition: 0.3s;
 
       &:hover {
         cursor: pointer;
+        transform: scale(1.2);
         transform: scale(1.2);
       }
     }
@@ -121,12 +131,16 @@
     }
   }
 
+
   @media (max-width: 480px) {
     .container_footer {
       @include flex-center(column, center, center);
       text-align: center;
     }
 
+    .contact,
+    .follow,
+    .logo-box {
     .contact,
     .follow,
     .logo-box {
@@ -142,3 +156,4 @@
     }
   }
 }
+
