@@ -30,7 +30,7 @@
     <section id="start" class="start">
       <div class="container start_box">
         <h1>Feel the Universe</h1>
-        <button class="button start_btn">Order Camping Tour</button>
+        <button class="button start_btn" data-modal-open>Order Camping Tour</button>
         <a class="arrow-down" href="#camping">
           <img src="./images/icons/arrow-down.svg" alt="Scroll down" />
         </a>
@@ -125,7 +125,13 @@
         </a>
       </div>
     </section>
-    <section class="modal Fill_form"></section>
-    <script src="./js/menuOpen.js"></script>
+    <div class="beckdrop is-hidden" data-modal>
+      <div class="modal">
+         <button type="button" class="modal-close" data-modal-close>X</button>
+         <p class="modal-title">Заголовок формы</p>
+      </div>
+    </div>
+    <script src="./js/menuOpen.js" type="module"></script>
+    <script src="./js/modalOpen.js" type="module"></script>
   </body>
 </html>
