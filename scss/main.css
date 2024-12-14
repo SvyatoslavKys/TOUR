@@ -25,7 +25,9 @@ a {
 
 body {
   font-family: "Roboto", sans-serif;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   background: black;
   overflow: hidden;
 }
@@ -34,7 +36,7 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 }
 
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -56,7 +58,9 @@ html {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.15; /* 1. Correct the line height in all browsers. */
   -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
-  tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+  -moz-tab-size: 4;
+    -o-tab-size: 4;
+       tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
 }
 
 /*
@@ -644,38 +648,46 @@ summary {
   }
 }
 
-.beckdrop {
+.backdrop {
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
+  max-height: 626px;
   background-color: rgba(25, 28, 38, 0.5333333333);
   transition: 300ms;
+  z-index: 3;
 }
 
 .modal {
-  position: absolute;
-  width: 700px;
-  height: 500px;
-  background-color: white;
+  position: relative;
+  padding: 64px;
+  width: 100%;
+  max-width: 747px;
+  height: 100%;
+  max-height: 626px;
+  background-color: #f3f3f3;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: 300ms;
-  border-radius: 4px;
-  padding: 35px;
+  overflow-y: auto;
+}
+@media (max-width: 768px) {
+  .modal {
+    padding: 32px;
+  }
 }
 
 .modal-close {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid #FF6C00;
+  top: 40px;
+  right: 40px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  right: 10px;
-  top: 10px;
-  background-color: none;
+  border: none;
+  background-color: transparent;
   transition: 300ms;
 }
 .modal-close .modal-close:hover {
@@ -683,17 +695,72 @@ summary {
   background-color: var(--accent-color);
 }
 
+.form-field {
+  margin-bottom: 32px;
+}
+
+.form-field-name {
+  display: flex;
+  gap: 69px;
+  margin-bottom: 32px;
+  margin-top: 58px;
+}
+@media (max-width: 768px) {
+  .form-field-name {
+    display: block;
+  }
+}
+
+.form-label {
+  display: block;
+}
+
+.form-input {
+  padding: 18px 48px;
+  width: 100%;
+  border: 1px solid #060606;
+  border-radius: 8px;
+  background-color: transparent;
+}
+.form-input:focus {
+  border-color: blueviolet;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  [name=user-name] {
+    margin-bottom: 32px;
+  }
+}
+
+.form-button {
+  display: block;
+  margin: 0 auto;
+  padding: 18px 109px;
+  color: #f3f3f3;
+  background-color: #060606;
+  border: 1px solid #060606;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  color: #75452c;
+  background-color: transparent;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -100000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .is-hidden {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
   transform: rotate(360);
-}
-
-.modal-title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.5;
-  text-align: center;
 }/*# sourceMappingURL=main.css.map */
