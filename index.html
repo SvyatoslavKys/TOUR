@@ -44,6 +44,69 @@
           <a class="arrow-up" href="#start">
             <img src="./images/icons/arrow-down.svg" alt="Scroll up" />
           </a>
+          <ul class="card-list">
+            <li class="card-item card-open">
+              <img src="./images/img/unsplash.png" alt="unsplash">
+              <h3>tour Frankonia</h3>
+              <p>group 12 persons</p>
+              <ul class="card-big">
+                <li class="item-image"><img src="./images/img/unsplash_big-card.png" alt="unsplash big card"></li>
+                <li class="item-discr"> 
+                  <h3>tour Frankonia</h3>
+                  <ul class="item-big-discr">
+                    <li>
+                      <p>duration</p>
+                      <p>5 days</p>
+                    </li>
+                    <li>
+                      <p>number of people</p>
+                      <p>12 persons</p>
+                    </li>
+                    <li>
+                      <P>complexity</P>
+                      <P>
+                        <img src="./images/icons/fire.svg" alt="fire">
+                        <img src="./images/icons/fire.svg" alt="fire">
+                      </P>
+                    </li>
+                    <li>
+                      <p>route</p>
+                      <p class="big-discr">Star pass, river Sota, valley of snow, village os stones, blomming pass.</p>
+                    </li>
+                  </ul>
+                  <button>view  reviews</button>
+                </li>
+                
+              </ul>
+            </li>
+            <li class="card-item">
+              <img src="./images/img/unsplash_2.png" alt="">
+              <h3>tour Lakes</h3>
+              <p>group 8 persons</p>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <img src="./images/img/unsplash_3.png" alt="">
+              <h3>tour Weekend</h3>
+              <p>group 24 persons</p>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+          </ul>
+          <h2>“Camping – because therapy is expensive.”</h2>
         </div>
         <footer class="footer">
           <div class="wrapper">
@@ -143,7 +206,10 @@
               type="text"
               name="user-name"
               id="user-name"
-              placeholder="Name"
+              placeholder="Name*"
+              title="Mark"
+              minlength="3"
+              required
             />
 
             <label class="form-label visually-hidden" for="user-surname"
@@ -154,7 +220,10 @@
               type="text"
               Surname="user-surname"
               id="user-surname"
-              placeholder="Surname"
+              title="Kadylo"
+              placeholder="Surname*"
+              minlength="3"
+              required
             />
           </div>
 
@@ -167,7 +236,10 @@
               type="tel"
               tel="user-tel"
               id="user-tel"
-              placeholder="Phone number"
+              title="123 456 789"
+              minlength="9"
+              placeholder="Phone number*"
+              required
             />
           </div>
 
@@ -181,6 +253,8 @@
               name="user-email"
               id="user-email"
               placeholder="Email"
+              title="yourmail@mail.com*"
+              required
             />
           </div>
 
