@@ -1,5 +1,8 @@
 .campingboxcontainer{
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .camping_box{
   position: relative;
@@ -9,4 +12,137 @@
   top: 44px;
   right: 44px;
   transform: rotate(180deg);
+}
+.card-list{
+  padding-top: 10em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  max-width: 1288px;
+  overflow: scroll;
+  &+h2{
+    margin-top: 3em;
+    color: white;
+    font-family: 'Kanit', sans-serif;
+    font-size: clamp(28px, 8vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    
+  }
+}
+
+.item-big-discr{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  &+button{
+    padding: 18px 111px;
+    border-radius: 8px;
+    opacity: 0px;
+    background: #060606;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    cursor: pointer;
+    &:hover{
+      background: white;
+      color: #060606;
+    }
+  }
+}
+.item-discr{
+  padding: 20px 145px;
+  text-align: center;
+  @media (max-width: 768px) {
+    padding: 20px 10px;
+    overflow: scroll;
+    display: block;
+  }
+  h3{
+    font-family: Kanit;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 64px;
+  }
+}
+.big-discr{
+  max-width: 190px;
+}
+.card-item {
+  max-width: 394px;
+  background: white;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.card-open:hover .card-big {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 1288px;
+    justify-content: space-between;
+    background: white;
+    padding: 40px 20px;
+    z-index: 3;
+    @media (max-width: 1288px) {
+      padding: 20px 10px;
+      overflow: scroll;
+      display: block;
+    }
+  
+
+    li {
+      h3 {
+        text-align: center;
+      }
+    }
+  }
+
+  & > h3 {
+    margin-top: 20px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  & > p {
+    margin-top: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 10px;
+  }
+
+  & > img {
+    @media (max-width: 375px) {
+      max-width: 300px;
+    }
+  }
+}
+
+.card-big {
+  display: none; 
 }
