@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('[data-menu-button]');
     const closeButton = document.querySelector('[data-close-menu]');
     const menu = document.querySelector('[data-menu]');
-    const menuButtonAbout = document.querySelector('[data-menu-button-about]');
-    const closeButtonAbout = document.querySelector('[data-close-menu-about]');
-    const menuAbout = document.querySelector('[data-menu-about]');
+    const menuLinks = document.querySelectorAll('[data-menu] .menu a'); // Select all menu links
 
     // Helper function to toggle menus
     function toggleMenu(button, menu, isOpenClass, isHiddenClass, shouldOpen) {
@@ -20,17 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Menu About event listeners
-    if (menuButtonAbout && closeButtonAbout && menuAbout) {
-        menuButtonAbout.addEventListener('click', () => {
-            toggleMenu(menuButtonAbout, menuAbout, 'is-open', 'is-hiden', true);
-        });
-
-        closeButtonAbout.addEventListener('click', () => {
-            toggleMenu(menuButtonAbout, menuAbout, 'is-open', 'is-hiden', false);
-        });
-    }
-
     // Main Menu event listeners
     if (menuButton && closeButton && menu) {
         menuButton.addEventListener('click', () => {
@@ -41,4 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleMenu(menuButton, menu, 'is-open', 'is-hiden', false);
         });
     }
+
+    // Close the menu when a menu link is clicked
+    menuLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            toggleMenu(menuButton, menu, 'is-open', 'is-hiden', false);
+        });
+    });
 });
