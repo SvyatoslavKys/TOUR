@@ -2,11 +2,12 @@ import { useEffect, useId, useState } from 'react'
 import fireIcon from '../images/icons/fire.svg'
 import { testimonials, tours } from './data/tours.js'
 
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Tours', href: '#tours' },
-  { label: 'About us', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+const sections = [
+  { id: 'home', label: 'Home' },
+  { id: 'tours', label: 'Tours' },
+  { id: 'about', label: 'About us' },
+  { id: 'reviews', label: 'Reviews' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 function ArrowIcon({ direction = 'down' }) {
@@ -21,6 +22,42 @@ function ArrowIcon({ direction = 'down' }) {
   )
 }
 
+function SectionControls({ currentId, onNavigate }) {
+  const currentIndex = sections.findIndex((section) => section.id === currentId)
+  const previousSection = sections[currentIndex - 1]
+  const nextSection = sections[currentIndex + 1]
+
+  return (
+    <nav className="section-controls" aria-label="Section navigation">
+      <span className="section-controls__count" aria-hidden="true">
+        0{currentIndex + 1} / 0{sections.length}
+      </span>
+      {previousSection && (
+        <button
+          className="section-control section-control--previous"
+          type="button"
+          onClick={() => onNavigate(previousSection.id)}
+          aria-label={`Previous section: ${previousSection.label}`}
+        >
+          <ArrowIcon direction="up" />
+          <span>{previousSection.label}</span>
+        </button>
+      )}
+      {nextSection && (
+        <button
+          className="section-control section-control--next"
+          type="button"
+          onClick={() => onNavigate(nextSection.id)}
+          aria-label={`Next section: ${nextSection.label}`}
+        >
+          <span>{nextSection.label}</span>
+          <ArrowIcon />
+        </button>
+      )}
+    </nav>
+  )
+}
+
 function CloseIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 32 32">
@@ -29,10 +66,18 @@ function CloseIcon() {
   )
 }
 
-function Header({ menuOpen, setMenuOpen }) {
+function Header({ menuOpen, setMenuOpen, onNavigate }) {
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="Tour home">
+      <a
+        className="brand"
+        href="#home"
+        aria-label="Tour home"
+        onClick={(event) => {
+          event.preventDefault()
+          onNavigate('home')
+        }}
+      >
         TOUR<span>.</span>
       </a>
 
@@ -70,10 +115,17 @@ function Header({ menuOpen, setMenuOpen }) {
           </button>
         </div>
         <ul>
-          {navItems.map((item, index) => (
-            <li key={item.href}>
+          {sections.map((item, index) => (
+            <li key={item.id}>
               <span aria-hidden="true">0{index + 1}</span>
-              <a href={item.href} onClick={() => setMenuOpen(false)}>
+              <a
+                href={`#${item.id}`}
+                onClick={(event) => {
+                  event.preventDefault()
+                  onNavigate(item.id)
+                  setMenuOpen(false)
+                }}
+              >
                 {item.label}
               </a>
             </li>
@@ -85,9 +137,15 @@ function Header({ menuOpen, setMenuOpen }) {
   )
 }
 
-function Hero({ onBook }) {
+function Hero({ isActive, onBook, onNavigate }) {
   return (
-    <section className="hero" id="home" aria-labelledby="hero-title">
+    <section
+      className="hero screen-section"
+      id="home"
+      aria-labelledby="hero-title"
+      aria-hidden={!isActive}
+      inert={!isActive}
+    >
       <div className="hero__shade" />
       <div className="page-shell hero__content">
         <p className="eyebrow hero__eyebrow">Small groups · Untamed places</p>
@@ -104,10 +162,7 @@ function Hero({ onBook }) {
           <span aria-hidden="true">↗</span>
         </button>
       </div>
-      <a className="section-arrow" href="#tours" aria-label="Discover our tours">
-        <span>Discover</span>
-        <ArrowIcon />
-      </a>
+      <SectionControls currentId="home" onNavigate={onNavigate} />
       <p className="hero__index" aria-hidden="true">
         43° 21′ 21″ N<br />42° 26′ 20″ E
       </p>
@@ -156,9 +211,15 @@ function TourCard({ tour, index, onSelect }) {
   )
 }
 
-function Tours({ onSelect }) {
+function Tours({ isActive, onNavigate, onSelect }) {
   return (
-    <section className="tours section-dark" id="tours" aria-labelledby="tours-title">
+    <section
+      className="tours section-dark screen-section"
+      id="tours"
+      aria-labelledby="tours-title"
+      aria-hidden={!isActive}
+      inert={!isActive}
+    >
       <div className="page-shell">
         <div className="section-heading">
           <div>
@@ -182,13 +243,20 @@ function Tours({ onSelect }) {
           Camping — because therapy is expensive.
         </blockquote>
       </div>
+      <SectionControls currentId="tours" onNavigate={onNavigate} />
     </section>
   )
 }
 
-function About({ onBook }) {
+function About({ isActive, onBook, onNavigate }) {
   return (
-    <section className="about" id="about" aria-labelledby="about-title">
+    <section
+      className="about screen-section"
+      id="about"
+      aria-labelledby="about-title"
+      aria-hidden={!isActive}
+      inert={!isActive}
+    >
       <div className="about__shade" />
       <div className="page-shell about__layout">
         <div className="about__intro">
@@ -225,13 +293,20 @@ function About({ onBook }) {
           </button>
         </div>
       </div>
+      <SectionControls currentId="about" onNavigate={onNavigate} />
     </section>
   )
 }
 
-function Reviews() {
+function Reviews({ isActive, onNavigate }) {
   return (
-    <section className="reviews" id="reviews" aria-labelledby="reviews-title">
+    <section
+      className="reviews screen-section"
+      id="reviews"
+      aria-labelledby="reviews-title"
+      aria-hidden={!isActive}
+      inert={!isActive}
+    >
       <div className="reviews__shade" />
       <div className="page-shell reviews__content">
         <div className="section-heading section-heading--light">
@@ -254,6 +329,7 @@ function Reviews() {
           ))}
         </div>
       </div>
+      <SectionControls currentId="reviews" onNavigate={onNavigate} />
     </section>
   )
 }
@@ -284,9 +360,14 @@ function SocialIcon({ type }) {
   )
 }
 
-function Footer({ onBook }) {
+function Footer({ isActive, onBook, onNavigate }) {
   return (
-    <footer className="footer" id="contact">
+    <footer
+      className="footer screen-section"
+      id="contact"
+      aria-hidden={!isActive}
+      inert={!isActive}
+    >
       <div className="page-shell footer__top">
         <div>
           <p className="eyebrow">Ready when you are</p>
@@ -299,7 +380,14 @@ function Footer({ onBook }) {
 
       <div className="page-shell footer__grid">
         <div>
-          <a className="footer__brand" href="#home">TOUR<span>.</span></a>
+          <a
+            className="footer__brand"
+            href="#home"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate('home')
+            }}
+          >TOUR<span>.</span></a>
           <p>Camping journeys for curious people.</p>
         </div>
         <div>
@@ -309,9 +397,18 @@ function Footer({ onBook }) {
         </div>
         <div>
           <h3>Navigate</h3>
-          <a href="#tours">Tours</a>
-          <a href="#about">About us</a>
-          <a href="#reviews">Reviews</a>
+          {sections.slice(1, 4).map((section) => (
+            <a
+              href={`#${section.id}`}
+              key={section.id}
+              onClick={(event) => {
+                event.preventDefault()
+                onNavigate(section.id)
+              }}
+            >
+              {section.label}
+            </a>
+          ))}
         </div>
         <div>
           <h3>Follow us</h3>
@@ -326,8 +423,8 @@ function Footer({ onBook }) {
       </div>
       <div className="page-shell footer__bottom">
         <span>© {new Date().getFullYear()} TOUR</span>
-        <a href="#home">Back to top ↑</a>
       </div>
+      <SectionControls currentId="contact" onNavigate={onNavigate} />
     </footer>
   )
 }
@@ -481,10 +578,16 @@ function BookingModal({ initialTour, onClose }) {
 }
 
 export default function App() {
+  const initialSection = sections.findIndex(
+    (section) => section.id === window.location.hash.slice(1),
+  )
   const [menuOpen, setMenuOpen] = useState(false)
   const [selectedTour, setSelectedTour] = useState(null)
   const [bookingTour, setBookingTour] = useState(undefined)
   const [bookingOpen, setBookingOpen] = useState(false)
+  const [currentSection, setCurrentSection] = useState(
+    initialSection >= 0 ? initialSection : 0,
+  )
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -495,6 +598,40 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  useEffect(() => {
+    const syncSectionFromUrl = () => {
+      const sectionIndex = sections.findIndex(
+        (section) => section.id === window.location.hash.slice(1),
+      )
+
+      if (sectionIndex >= 0) setCurrentSection(sectionIndex)
+    }
+
+    if (!window.location.hash) {
+      window.history.replaceState(null, '', '#home')
+    }
+
+    window.addEventListener('popstate', syncSectionFromUrl)
+    window.addEventListener('hashchange', syncSectionFromUrl)
+
+    return () => {
+      window.removeEventListener('popstate', syncSectionFromUrl)
+      window.removeEventListener('hashchange', syncSectionFromUrl)
+    }
+  }, [])
+
+  function navigateTo(sectionId) {
+    const sectionIndex = sections.findIndex((section) => section.id === sectionId)
+    if (sectionIndex < 0) return
+
+    setCurrentSection(sectionIndex)
+    setMenuOpen(false)
+
+    if (window.location.hash !== `#${sectionId}`) {
+      window.history.pushState(null, '', `#${sectionId}`)
+    }
+  }
+
   function openBooking(tour) {
     setSelectedTour(null)
     setBookingTour(tour)
@@ -503,21 +640,42 @@ export default function App() {
 
   function showReviews() {
     setSelectedTour(null)
-    window.setTimeout(() => {
-      document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })
-    }, 20)
+    navigateTo('reviews')
   }
 
   return (
     <>
-      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <main>
-        <Hero onBook={() => openBooking()} />
-        <Tours onSelect={setSelectedTour} />
-        <About onBook={() => openBooking()} />
-        <Reviews />
+      <Header
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        onNavigate={navigateTo}
+      />
+      <main
+        className="section-track"
+        style={{ '--section-index': currentSection }}
+      >
+        <Hero
+          isActive={currentSection === 0}
+          onBook={() => openBooking()}
+          onNavigate={navigateTo}
+        />
+        <Tours
+          isActive={currentSection === 1}
+          onNavigate={navigateTo}
+          onSelect={setSelectedTour}
+        />
+        <About
+          isActive={currentSection === 2}
+          onBook={() => openBooking()}
+          onNavigate={navigateTo}
+        />
+        <Reviews isActive={currentSection === 3} onNavigate={navigateTo} />
+        <Footer
+          isActive={currentSection === 4}
+          onBook={() => openBooking()}
+          onNavigate={navigateTo}
+        />
       </main>
-      <Footer onBook={() => openBooking()} />
 
       {selectedTour && (
         <TourModal
