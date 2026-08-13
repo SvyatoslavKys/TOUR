@@ -172,7 +172,7 @@ function Difficulty({ level, showLabel = false }) {
   )
 }
 
-function TourCard({ tour, index, onSelect }) {
+function TourCard({ tour, onSelect }) {
   return (
     <article className="tour-card">
       <button
@@ -183,17 +183,10 @@ function TourCard({ tour, index, onSelect }) {
       >
         <span className="tour-card__image-wrap">
           <img src={tour.cardImage} alt={`Landscape on the ${tour.name} tour`} />
-          <span className="tour-card__number">0{index + 1}</span>
-          <span className="tour-card__view">View tour ↗</span>
         </span>
         <span className="tour-card__body">
-          <span>
-            <span className="tour-card__eyebrow">{tour.eyebrow}</span>
-            <strong>Tour {tour.name}</strong>
-          </span>
-          <span className="tour-card__meta">
-            {tour.duration} · {tour.groupSize} people
-          </span>
+          <strong>tour {tour.name}</strong>
+          <span className="tour-card__meta">group {tour.groupSize} persons</span>
         </span>
       </button>
     </article>
@@ -209,27 +202,17 @@ function Tours({ isActive, onNavigate, onSelect }) {
       aria-hidden={!isActive}
       inert={!isActive}
     >
-      <div className="page-shell">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Choose your pace</p>
-            <h2 id="tours-title">Find your way outside.</h2>
-          </div>
-          <p>
-            Three routes, each with its own rhythm. Every tour includes an
-            experienced guide, equipment support and a place by the fire.
-          </p>
-        </div>
+      <div className="page-shell tours__content">
+        <h2 className="visually-hidden" id="tours-title">Choose a camping tour</h2>
 
         <div className="tour-grid">
-          {tours.map((tour, index) => (
-            <TourCard key={tour.id} tour={tour} index={index} onSelect={onSelect} />
+          {tours.map((tour) => (
+            <TourCard key={tour.id} tour={tour} onSelect={onSelect} />
           ))}
         </div>
 
         <blockquote className="camping-quote">
-          <span>“</span>
-          Camping — because therapy is expensive.
+          “camping – because therapy is expensive.”
         </blockquote>
       </div>
       <SectionControls currentId="tours" onNavigate={onNavigate} />
@@ -452,30 +435,27 @@ function ModalShell({ children, labelId, onClose, modifier = '' }) {
   )
 }
 
-function TourModal({ tour, onClose, onBook, onReviews }) {
+function TourModal({ tour, onClose, onReviews }) {
   const titleId = useId()
 
   return (
     <ModalShell labelId={titleId} onClose={onClose} modifier="tour-modal">
       <div className="tour-modal__image">
         <img src={tour.largeImage} alt={`A moment from the ${tour.name} tour`} />
-        <span>{tour.eyebrow}</span>
       </div>
       <div className="tour-modal__content">
-        <p className="eyebrow">Camping tour</p>
-        <h2 id={titleId}>Tour {tour.name}</h2>
-        <p className="tour-modal__summary">{tour.summary}</p>
+        <h2 id={titleId}>tour {tour.name}</h2>
         <dl className="tour-details">
           <div>
             <dt>Duration</dt>
             <dd>{tour.duration}</dd>
           </div>
           <div>
-            <dt>Group</dt>
-            <dd>{tour.groupSize} people</dd>
+            <dt>Number of people</dt>
+            <dd>{tour.groupSize} persons</dd>
           </div>
           <div>
-            <dt>Difficulty</dt>
+            <dt>Complexity</dt>
             <dd><Difficulty level={tour.difficulty} /></dd>
           </div>
           <div className="tour-details__route">
@@ -484,11 +464,8 @@ function TourModal({ tour, onClose, onBook, onReviews }) {
           </div>
         </dl>
         <div className="tour-modal__actions">
-          <button className="primary-button primary-button--dark" type="button" onClick={() => onBook(tour)}>
-            Book this tour <span aria-hidden="true">↗</span>
-          </button>
-          <button className="text-button text-button--dark" type="button" onClick={onReviews}>
-            View reviews →
+          <button className="primary-button primary-button--dark" type="button" onClick={onReviews}>
+            View reviews
           </button>
         </div>
       </div>
@@ -685,7 +662,6 @@ export default function App() {
         <TourModal
           tour={selectedTour}
           onClose={() => setSelectedTour(null)}
-          onBook={openBooking}
           onReviews={showReviews}
         />
       )}
