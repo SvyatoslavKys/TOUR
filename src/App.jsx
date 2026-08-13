@@ -17,7 +17,7 @@ function ArrowIcon({ direction = 'down' }) {
       aria-hidden="true"
       viewBox="0 0 48 48"
     >
-      <path d="M24 6v34M10 27l14 14 14-14" />
+      <path d="M10 15l14 14 14-14M10 27l14 14 14-14" />
     </svg>
   )
 }
@@ -29,9 +29,6 @@ function SectionControls({ currentId, onNavigate }) {
 
   return (
     <nav className="section-controls" aria-label="Section navigation">
-      <span className="section-controls__count" aria-hidden="true">
-        0{currentIndex + 1} / 0{sections.length}
-      </span>
       {previousSection && (
         <button
           className="section-control section-control--previous"
@@ -40,7 +37,6 @@ function SectionControls({ currentId, onNavigate }) {
           aria-label={`Previous section: ${previousSection.label}`}
         >
           <ArrowIcon direction="up" />
-          <span>{previousSection.label}</span>
         </button>
       )}
       {nextSection && (
@@ -50,7 +46,6 @@ function SectionControls({ currentId, onNavigate }) {
           onClick={() => onNavigate(nextSection.id)}
           aria-label={`Next section: ${nextSection.label}`}
         >
-          <span>{nextSection.label}</span>
           <ArrowIcon />
         </button>
       )}
@@ -66,9 +61,11 @@ function CloseIcon() {
   )
 }
 
-function Header({ menuOpen, setMenuOpen, onNavigate }) {
+function Header({ isHome, isIntroPlaying, menuOpen, setMenuOpen, onNavigate }) {
   return (
-    <header className="site-header">
+    <header
+      className={`site-header ${isHome ? 'is-home' : ''} ${isIntroPlaying ? 'is-intro-playing' : ''}`}
+    >
       <a
         className="brand"
         href="#home"
@@ -137,35 +134,27 @@ function Header({ menuOpen, setMenuOpen, onNavigate }) {
   )
 }
 
-function Hero({ isActive, onBook, onNavigate }) {
+function Hero({ isActive, isIntroPlaying, onBook, onNavigate }) {
   return (
     <section
-      className="hero screen-section"
+      className={`hero screen-section ${isIntroPlaying ? 'is-intro-playing' : 'is-intro-complete'}`}
       id="home"
       aria-labelledby="hero-title"
       aria-hidden={!isActive}
       inert={!isActive}
     >
+      <div className="hero__background" aria-hidden="true" />
       <div className="hero__shade" />
       <div className="page-shell hero__content">
-        <p className="eyebrow hero__eyebrow">Small groups · Untamed places</p>
         <h1 id="hero-title">
-          Feel the
-          <span>Universe</span>
+          <span className="hero__title-line hero__title-line--one">Feel the</span>
+          <span className="hero__title-line hero__title-line--two">Universe</span>
         </h1>
-        <p className="hero__copy">
-          Leave the noise behind. We plan honest camping journeys for people
-          who want to feel close to the world again.
-        </p>
         <button className="primary-button" type="button" onClick={onBook}>
           Order camping tour
-          <span aria-hidden="true">↗</span>
         </button>
       </div>
       <SectionControls currentId="home" onNavigate={onNavigate} />
-      <p className="hero__index" aria-hidden="true">
-        43° 21′ 21″ N<br />42° 26′ 20″ E
-      </p>
     </section>
   )
 }
@@ -585,6 +574,10 @@ export default function App() {
   const [selectedTour, setSelectedTour] = useState(null)
   const [bookingTour, setBookingTour] = useState(undefined)
   const [bookingOpen, setBookingOpen] = useState(false)
+  const [isIntroPlaying, setIsIntroPlaying] = useState(
+    (initialSection < 0 || initialSection === 0) &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
   const [currentSection, setCurrentSection] = useState(
     initialSection >= 0 ? initialSection : 0,
   )
@@ -597,6 +590,13 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
+
+  useEffect(() => {
+    if (!isIntroPlaying) return undefined
+
+    const introTimer = window.setTimeout(() => setIsIntroPlaying(false), 2500)
+    return () => window.clearTimeout(introTimer)
+  }, [isIntroPlaying])
 
   useEffect(() => {
     const syncSectionFromUrl = () => {
@@ -625,6 +625,7 @@ export default function App() {
     if (sectionIndex < 0) return
 
     setCurrentSection(sectionIndex)
+    if (sectionId !== 'home') setIsIntroPlaying(false)
     setMenuOpen(false)
 
     if (window.location.hash !== `#${sectionId}`) {
@@ -646,6 +647,8 @@ export default function App() {
   return (
     <>
       <Header
+        isHome={currentSection === 0}
+        isIntroPlaying={isIntroPlaying}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
         onNavigate={navigateTo}
@@ -656,6 +659,7 @@ export default function App() {
       >
         <Hero
           isActive={currentSection === 0}
+          isIntroPlaying={isIntroPlaying}
           onBook={() => openBooking()}
           onNavigate={navigateTo}
         />
